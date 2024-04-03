@@ -1,4 +1,5 @@
 import { defineEventHandler } from 'h3';
+import { baseUrl, password, username } from 'src/util/keys';
 
 // http://localhost:5173/api/v1/homesec/devices
 export default defineEventHandler(async () => {
@@ -6,9 +7,9 @@ export default defineEventHandler(async () => {
 
   // this.logger.verbose(`[${req.user.name}] GET to /api/homesec/devices`);
 
-  const baseUrl = 'baseUrl';
-  const username = 'username';
-  const password = 'password';
+  //   const baseUrl = 'baseUrl';
+  //   const username = 'username';
+  //   const password = 'password';
 
   try {
     const url = `${baseUrl}/action/deviceListGet`;
