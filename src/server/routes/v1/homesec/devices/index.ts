@@ -1,8 +1,9 @@
-import { defineEventHandler } from 'h3';
-import { baseUrl, password, username } from 'src/util/keys';
+import { defineEventHandler, createError } from 'h3';
+import { baseUrl, password, username } from '../../../../../util/keys';
+import type { HomesecDevicesResponse } from '../../../../../util/types';
 
 // http://localhost:5173/api/v1/homesec/devices
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (): Promise<HomesecDevicesResponse> => {
   console.log(`GET to /api/v1/homesec/devices`);
 
   // this.logger.verbose(`[${req.user.name}] GET to /api/homesec/devices`);
@@ -20,8 +21,10 @@ export default defineEventHandler(async () => {
       'Basic ' + Buffer.from(username + ':' + password).toString('base64')
     );
 
-    const x = await (await fetch(url, { headers })).json();
-    console.log(x);
+    const response: HomesecDevicesResponse = await (
+      await fetch(url, { headers })
+    ).json();
+    console.log(response);
 
     //   const response1: HomesecPanelResponse = await got(
     //       `${this.baseUrl}/action/panelCondGet`,
@@ -37,7 +40,7 @@ export default defineEventHandler(async () => {
     //       password: this.password,
     //   }).json();
     //   // TODO this.logger.log(response);
-    //   return response;
+    return response;
   } catch (err) {
     console.log(err);
     //   this.logger.error(err);
@@ -45,7 +48,10 @@ export default defineEventHandler(async () => {
     //       "failed to receive downstream data",
     //       HttpStatus.INTERNAL_SERVER_ERROR
     //   );
+    // throw new Error('Internal server error');
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Invalid downstream response',
+    });
   }
-
-  return { message: 'Devices!' };
 });
