@@ -1,3 +1,27 @@
+# At Home Remote
+
+Variant of the HomeRemote home automation dashboard, that is only accessible from the local network.
+
+[![Publish to Docker Hub](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml/badge.svg?branch=qwik)](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml)
+
+
+## Usage
+
+### With Docker Compose
+
+create a docker-compose.yml with:
+
+```
+services:
+  at-home-remote:
+    image: ghcr.io/mdvanes/at-home-remote:main
+    volumes:
+      - ./data:/usr/src/app/data
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+```
+
 # Analog App
 
 This project was generated with [Analog](https://analogjs.org), the fullstack meta-framework for Angular.
