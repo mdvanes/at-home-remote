@@ -1,0 +1,10 @@
+# NOTE: This is the docker-compose for local development. For the production docker-compose, see README.md
+version: "3"
+services:
+  at-home-remote:
+    build: .
+    volumes:
+      - ./data/docker:/usr/src/app/data
+    ports:
+      - 3000:3000
+    restart: unless-stopped
