@@ -3,18 +3,19 @@ import { appendFileSync } from 'node:fs';
 
 const log = (...msg: string[]): void => {
   try {
-    console.log(...msg);
     const timestamp = new Date().toISOString();
-    const fileMsg = [`\n[${timestamp}]`, ...msg];
-    appendFileSync('data/log.txt', fileMsg.join('\t'));
+    const newMsg = [`\n[${timestamp}]`, ...msg];
+    console.log(...newMsg);
+    appendFileSync('data/log.txt', newMsg.join('\t'));
   } catch (err) {
     console.log(err);
   }
 };
 
 // http://localhost:5173/api/webhooks/homesec/toggle
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   log(event.toString());
+  console.log(process.env['DOMOTICZ_URI']);
 
   log('headers:', JSON.stringify(event.node.req.headers, null, 2));
   log(
@@ -22,6 +23,20 @@ export default defineEventHandler((event) => {
     (event.node.req.headers.origin ?? '').toString(),
     typeof event.node.req.headers.origin
   );
+
+  const DOMOTICZ_URI = process.env['DOMOTICZ_URI'];
+  const DOMOTICZ_SWITCH_ID = process.env['DOMOTICZ_SWITCH_ID'];
+  const newState = 'Toggle';
+  const switchType = 'switchlight';
+  // const newState = state === "on" ? "On" : "Off";
+  const targetUri = `${DOMOTICZ_URI}/json.htm?type=command&param=${switchType}&idx=${DOMOTICZ_SWITCH_ID}&switchcmd=${newState}`;
+  try {
+    const response = await (await fetch(targetUri)).json();
+    log('RESPONSE', response);
+  } catch (err) {
+    log('ERROR', (err as Error).message);
+  }
+
   // @ ts-ignore
   //console.log(event.node.req.client);
   return { message: 'Toggle!' };

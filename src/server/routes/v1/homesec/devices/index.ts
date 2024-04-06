@@ -3,8 +3,8 @@ import { baseUrl, password, username } from '../../../../../util/keys';
 import type { HomesecDevicesResponse } from '../../../../../util/types';
 
 // http://localhost:5173/api/v1/homesec/devices
-export default defineEventHandler(async (): Promise<HomesecDevicesResponse> => {
-  console.log(`GET to /api/v1/homesec/devices`);
+export default defineEventHandler(async (event): Promise<HomesecDevicesResponse> => {
+  console.log(event.toString());
 
   // this.logger.verbose(`[${req.user.name}] GET to /api/homesec/devices`);
 

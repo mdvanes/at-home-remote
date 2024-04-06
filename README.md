@@ -17,6 +17,7 @@ services:
     image: ghcr.io/mdvanes/at-home-remote:main
     volumes:
       - ./data:/usr/src/app/data
+      - ./.env:/usr/src/app/.env
     ports:
       - 3000:3000
     restart: unless-stopped
@@ -55,3 +56,5 @@ Run `npm run test` to run unit tests with [Vitest](https://vitest.dev).
 - https://hookdeck.com/webhooks/guides/complete-guide-to-webhook-security
   - https -> https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
   - ?
+
+// NOTE: http://192.168.0.8:3044/api/webhooks/homesec/toggle
