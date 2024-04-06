@@ -23,6 +23,12 @@ services:
     restart: unless-stopped
 ```
 
+### Build manually
+
+- `npm i`
+- `npm run build`
+- `npx dotenvx run -- node dist/analog/server/index.mjs`
+
 # Analog App
 
 This project was generated with [Analog](https://analogjs.org), the fullstack meta-framework for Angular.

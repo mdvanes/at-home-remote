@@ -28,7 +28,6 @@ export default defineEventHandler(async (event) => {
   const DOMOTICZ_SWITCH_ID = process.env['DOMOTICZ_SWITCH_ID'];
   const newState = 'Toggle';
   const switchType = 'switchlight';
-  // const newState = state === "on" ? "On" : "Off";
   const targetUri = `${DOMOTICZ_URI}/json.htm?type=command&param=${switchType}&idx=${DOMOTICZ_SWITCH_ID}&switchcmd=${newState}`;
   try {
     const response = await (await fetch(targetUri)).json();
@@ -37,8 +36,6 @@ export default defineEventHandler(async (event) => {
     log('ERROR', (err as Error).message);
   }
 
-  // @ ts-ignore
-  //console.log(event.node.req.client);
   return { message: 'Toggle!' };
 });
 
