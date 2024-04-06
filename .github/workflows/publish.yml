@@ -32,10 +32,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          # images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          images: |
-            name/app
-            ghcr.io/username/app            
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          # images: |
+          #   name/app
+          #   ghcr.io/username/app            
           tags: |
             type=schedule
             type=ref,event=branch
