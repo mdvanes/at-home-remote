@@ -9,7 +9,7 @@ Variant of the HomeRemote home automation dashboard, that is only accessible fro
 
 ### With Docker Compose
 
-create a docker-compose.yml with:
+Create a docker-compose.yml with:
 
 ```
 services:
@@ -18,10 +18,36 @@ services:
     volumes:
       - ./data:/usr/src/app/data
       - ./.env:/usr/src/app/.env
-    ports:
-      - 3044:3000
     restart: unless-stopped
+  nginx:
+    build: ./nginx-proxy
+    ports:
+      - 3044:80
+    env_file:
+      - ./env.properties
+    environment:
+      - PROXY_PASS=http://at-home-remote:3000/
+    volumes:
+      - ./certs:/etc/nginx/certs
+    restart: unless-stopped    
 ```
+
+Set up `.env` and `env.properties` files based on the example files in this repo.
+
+Create certs:
+
+```
+mkdir -p certs
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/nginx.key -out ./certs/nginx.crt
+```
+Create basic authentication user:
+
+```
+mkdir -p auth
+htpasswd -c ./auth/.htpasswd <USERNAME>
+```
+
+start with `docker-compose up -d`
 
 ### Build manually
 
