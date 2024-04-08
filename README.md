@@ -32,7 +32,7 @@ services:
     restart: unless-stopped    
 ```
 
-Set up `.env` and `env.properties` files based on the example files in this repo.
+Set up a `.env` file based on the example file in this repo.
 
 Create certs:
 
