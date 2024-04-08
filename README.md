@@ -19,7 +19,7 @@ services:
       - ./data:/usr/src/app/data
       - ./.env:/usr/src/app/.env
     ports:
-      - 3000:3000
+      - 3044:3000
     restart: unless-stopped
 ```
 

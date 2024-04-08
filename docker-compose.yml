@@ -5,6 +5,13 @@ services:
     volumes:
       - ./data/docker:/usr/src/app/data
       - ./.env:/usr/src/app/.env
+    restart: unless-stopped
+  nginx:
+    build: ./nginx-proxy
     ports:
-      - 3000:3000
+      - 3044:80
+    env_file:
+      - ./env.properties
+    environment:
+      - PROXY_PASS=http://at-home-remote:3000/
     restart: unless-stopped

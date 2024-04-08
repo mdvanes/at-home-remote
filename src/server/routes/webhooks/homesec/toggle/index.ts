@@ -12,7 +12,8 @@ const log = (...msg: string[]): void => {
   }
 };
 
-// http://localhost:5173/api/webhooks/homesec/toggle
+// Dev mode: curl http://localhost:5173/api/webhooks/homesec/toggle
+// Docker compose: curl http://username:password@localhost:3044/api/webhooks/homesec/toggle
 export default defineEventHandler(async (event) => {
   log(event.toString());
   console.log(process.env['DOMOTICZ_URI']);
@@ -41,4 +42,5 @@ export default defineEventHandler(async (event) => {
 
 // TODO try out security measures here!
 // HTTPS
-// Compare origin / IP / mac address?
+// Compare user-agent
+// Test Basic Authentication
