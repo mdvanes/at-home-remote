@@ -1,4 +1,5 @@
 import { ILog } from './log';
+import { createError } from 'h3';
 
 export const challengeUserAgent = (
   log: ILog,
@@ -16,7 +17,7 @@ export const challengeUserAgent = (
   );
 
   if (ALLOW_USER_AGENT && ALLOW_USER_AGENT !== userAgentHeader) {
-    throw new Error('Invalid User Agent');
+    throw createError({ statusCode: 400, statusMessage: 'Invalid User Agent' });
   }
 
   return true;

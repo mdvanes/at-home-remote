@@ -26,3 +26,39 @@ interface SensorRow {
 export interface HomesecDevicesResponse {
   senrows: SensorRow[];
 }
+
+type Modes = 'Disarm' | 'Home Arm 1';
+
+export enum PcondformModes {
+  Disarm = '0',
+  HomeArm = '2',
+}
+
+export interface HomesecPanelResponse {
+  updates: {
+    mode_a1: Modes;
+    mode_a2: Modes;
+    battery_ok: '1';
+    battery: 'Normal';
+    tamper_ok: '1';
+    tamper: 'N/A';
+    interference_ok: '1';
+    interference: 'Normal';
+    ac_activation_ok: '1';
+    ac_activation: 'Normal';
+    sys_in_inst: 'System in maintenance';
+    rssi: '1';
+    sig_gsm_ok: '1';
+    sig_gsm: 'N/A';
+  };
+  forms: {
+    pcondform1: {
+      mode: PcondformModes;
+      f_arm: '0';
+    };
+    pcondform2: {
+      mode: PcondformModes;
+      f_arm: '0';
+    };
+  };
+}

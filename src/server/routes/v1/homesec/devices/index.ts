@@ -2,8 +2,9 @@ import { defineEventHandler, createError } from 'h3';
 import type { HomesecDevicesResponse } from '../../../../../util/types';
 import { createLog } from '../../../../../util/log';
 
-const log = createLog('v1/homesec/toggle');
+const log = createLog('v1/homesec/devices');
 
+// TODO deduplicate this "devices" route with the "toggle" webhook? Redirect/re-use?
 // http://localhost:5173/api/v1/homesec/devices
 export default defineEventHandler(
   async (event): Promise<HomesecDevicesResponse> => {
