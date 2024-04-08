@@ -20,16 +20,14 @@ services:
       - ./.env:/usr/src/app/.env
     restart: unless-stopped
   nginx:
-    build: ./nginx-proxy
+    image: nginx:latest
     ports:
-      - 3044:80
-    env_file:
-      - ./env.properties
-    environment:
-      - PROXY_PASS=http://at-home-remote:3000/
+      - 3044:443
     volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
       - ./certs:/etc/nginx/certs
-    restart: unless-stopped    
+      - ./auth:/etc/nginx/auth
+    restart: unless-stopped 
 ```
 
 Set up a `.env` file based on the example file in this repo.
@@ -46,6 +44,8 @@ Create basic authentication user:
 mkdir -p auth
 htpasswd -c ./auth/.htpasswd <USERNAME>
 ```
+
+Copy nginx.conf from this repo to the dir where the docker-compose.yml is.
 
 start with `docker-compose up -d`
 
