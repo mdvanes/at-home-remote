@@ -49,6 +49,26 @@ Copy nginx.conf from this repo to the dir where the docker-compose.yml is.
 
 start with `docker-compose up -d`
 
+### With Docker Compose (for Kronaby)
+
+The Kronaby app can't use webhooks with (self signed) https nor with basic authentication. So in that case use:
+
+Create a docker-compose.yml with:
+
+```
+services:
+  at-home-remote:
+    image: ghcr.io/mdvanes/at-home-remote:main
+    ports:
+      - 3044:3000
+    volumes:
+      - ./data:/usr/src/app/data
+      - ./.env:/usr/src/app/.env
+    restart: unless-stopped
+```
+
+start with `docker-compose up -d`
+
 ### Build manually
 
 - `npm i`

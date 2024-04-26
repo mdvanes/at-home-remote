@@ -31,7 +31,9 @@ type Modes = 'Disarm' | 'Home Arm 1';
 
 export enum PcondformModes {
   Disarm = '0',
-  HomeArm = '2',
+  Arm = '1',
+  HomeArm1 = '2',
+  HomeArm2 = '3',
 }
 
 export interface HomesecPanelResponse {
@@ -61,4 +63,9 @@ export interface HomesecPanelResponse {
       f_arm: '0';
     };
   };
+}
+
+export interface HomesecPanelPostResponse {
+  result: 1 | 0;
+  message: 'Updated successfully.' | '???';
 }
