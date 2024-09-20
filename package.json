@@ -42,7 +42,8 @@
   "devDependencies": {
     "@analogjs/platform": "^1.8.1",
     "@analogjs/vite-plugin-angular": "^1.8.1",
-    "@angular/cli": "^17.2.0",
+    "@angular/build": "^18.2.5",
+    "@angular/cli": "^18.2.5",
     "@angular/compiler-cli": "^17.2.0",
     "@nx/vite": "~18.0.0",
     "jsdom": "^22.1.0",
