@@ -1,0 +1,65 @@
+name: Publish Docker image to Registry
+
+on: 
+  push:
+    # tags:
+    #   - '*'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out the repo 🛎️
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          # images: |
+          #   name/app
+          #   ghcr.io/username/app            
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha 
+      # - name: Get version for tag
+      #   id: version
+      #   run: |
+      #     echo "::set-output name=version::$(cat package.json | jq '.version' | cut -c2-100 | rev | cut -c2-100 | rev)"
+      # - name: Log tag
+      #   run: |
+      #     echo ${{ steps.version.outputs.version }}
+      #     git log -n 1 | cat
+      #     git status
+      - name: Build and push Docker image
+        # if: ${{ github.ref == 'main' }}
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          # push: true
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          # tags: at-home-remote:${{ steps.version.outputs.version }}
+          labels: ${{ steps.meta.outputs.labels }}
