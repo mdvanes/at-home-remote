@@ -1,14 +1,91 @@
-# AtHomeRemote
+# At Home Remote
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Variant of the HomeRemote home automation dashboard, that is only accessible from the local network. Uses Nx, Analog and Angular Material.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+[![Publish to Docker Hub](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml/badge.svg?branch=qwik)](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml)
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+
+## Usage
+
+### With Docker Compose
+
+Create a docker-compose.yml with:
+
+```
+services:
+  at-home-remote:
+    image: ghcr.io/mdvanes/at-home-remote:main
+    volumes:
+      - ./data:/usr/src/app/data
+      - ./.env:/usr/src/app/.env
+    restart: unless-stopped
+  nginx:
+    image: nginx:latest
+    ports:
+      - 3044:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+      - ./auth:/etc/nginx/auth
+    restart: unless-stopped 
+```
+
+Set up a `.env` file based on the example file in this repo.
+
+Create certs:
+
+```
+mkdir -p certs
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/nginx.key -out ./certs/nginx.crt
+```
+Create basic authentication user:
+
+```
+mkdir -p auth
+htpasswd -c ./auth/.htpasswd <USERNAME>
+```
+
+Copy nginx.conf from this repo to the dir where the docker-compose.yml is.
+
+start with `docker-compose up -d`
+
+### With Docker Compose (for Kronaby)
+
+The Kronaby app can't use webhooks with (self signed) https nor with basic authentication. So in that case use:
+
+Create a docker-compose.yml with:
+
+```
+services:
+  at-home-remote:
+    image: ghcr.io/mdvanes/at-home-remote:main
+    ports:
+      - 3044:3000
+    volumes:
+      - ./data:/usr/src/app/data
+      - ./.env:/usr/src/app/.env
+    restart: unless-stopped
+```
+
+start with `docker-compose up -d`
+
+### Build manually
+
+- `npm i`
+- `npm run build`
+- `npx dotenvx run -- node dist/analog/server/index.mjs`
+
+
+### Start for local development
+
+- Start: `npx nx serve at-home-remote`
+- Ng Generate: `npx nx g @angular/material:dashboard dashboard --project at-home-remote` (instead of `ng generate @angular/material:dashboard dashboard`)
+
+---
 
 ## Finish your CI setup
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/hw1B3YRaWh)
+[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/ZnZbFYBosI)
 
 
 ## Run tasks
@@ -65,7 +142,6 @@ Nx Console is an editor extension that enriches your developer experience. It le
 
 Learn more:
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
 - [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
