@@ -33,7 +33,10 @@ export default defineConfig(({ mode }) => {
               prerender: false,
             }
           }
-        }
+        },
+        vite: {
+          inlineStylesExtension: 'scss',
+        },
       }),
       
       nxViteTsPaths(),
