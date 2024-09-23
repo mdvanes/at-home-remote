@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-
-import { AnalogWelcomeComponent } from './analog-welcome.component';
+import { Component } from "@angular/core";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { AnalogWelcomeComponent } from "./analog-welcome.component";
+import { MytestComponent } from "./mytest.component";
 
 @Component({
-  selector: 'at-home-remote-home',
+  selector: "at-home-remote-home",
   standalone: true,
-  imports: [AnalogWelcomeComponent],
+  imports: [AnalogWelcomeComponent, MatSlideToggleModule, MytestComponent],
   template: `
-     <at-home-remote-analog-welcome/>
+    <mytest ngSkipHydration />
+    <at-home-remote-analog-welcome />
   `,
 })
-export default class HomeComponent {
-}
+export default class HomeComponent {}
