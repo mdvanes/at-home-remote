@@ -78,7 +78,8 @@ start with `docker-compose up -d`
 
 ### Start for local development
 
-- `npx nx serve at-home-remote`
+- Start: `npx nx serve at-home-remote`
+- Ng Generate: `npx nx g @angular/material:dashboard dashboard --project at-home-remote` (instead of `ng generate @angular/material:dashboard dashboard`)
 
 ---
 
