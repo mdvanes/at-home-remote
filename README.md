@@ -1,10 +1,86 @@
-# AtHomeRemote
+# At Home Remote
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Variant of the HomeRemote home automation dashboard, that is only accessible from the local network. Uses Nx, Analog and Angular Material.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+[![Publish to Docker Hub](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml/badge.svg?branch=qwik)](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml)
 
-Run `npx nx graph` to visually explore what got created. Now, let's get you up to speed!
+
+## Usage
+
+### With Docker Compose
+
+Create a docker-compose.yml with:
+
+```
+services:
+  at-home-remote:
+    image: ghcr.io/mdvanes/at-home-remote:main
+    volumes:
+      - ./data:/usr/src/app/data
+      - ./.env:/usr/src/app/.env
+    restart: unless-stopped
+  nginx:
+    image: nginx:latest
+    ports:
+      - 3044:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+      - ./auth:/etc/nginx/auth
+    restart: unless-stopped 
+```
+
+Set up a `.env` file based on the example file in this repo.
+
+Create certs:
+
+```
+mkdir -p certs
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/nginx.key -out ./certs/nginx.crt
+```
+Create basic authentication user:
+
+```
+mkdir -p auth
+htpasswd -c ./auth/.htpasswd <USERNAME>
+```
+
+Copy nginx.conf from this repo to the dir where the docker-compose.yml is.
+
+start with `docker-compose up -d`
+
+### With Docker Compose (for Kronaby)
+
+The Kronaby app can't use webhooks with (self signed) https nor with basic authentication. So in that case use:
+
+Create a docker-compose.yml with:
+
+```
+services:
+  at-home-remote:
+    image: ghcr.io/mdvanes/at-home-remote:main
+    ports:
+      - 3044:3000
+    volumes:
+      - ./data:/usr/src/app/data
+      - ./.env:/usr/src/app/.env
+    restart: unless-stopped
+```
+
+start with `docker-compose up -d`
+
+### Build manually
+
+- `npm i`
+- `npm run build`
+- `npx dotenvx run -- node dist/analog/server/index.mjs`
+
+
+### Start for local development
+
+- `npx nx serve at-home-remote`
+
+---
 
 ## Finish your CI setup
 

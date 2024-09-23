@@ -34,6 +34,9 @@ export default defineConfig(({ mode }) => {
             }
           }
         }
+        ,vite: {
+          inlineStylesExtension: 'scss',
+        },
       }),
       
       nxViteTsPaths(),
