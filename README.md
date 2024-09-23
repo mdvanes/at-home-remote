@@ -79,9 +79,6 @@ start with `docker-compose up -d`
 
 This project was generated with [Analog](https://analogjs.org), the fullstack meta-framework for Angular.
 
-## Setup
-
-Run `npm install` to install the application dependencies.
 
 ## Development
 
@@ -95,12 +92,7 @@ Run `npm run build` to build the client/server project. The client build artifac
 
 Run `npm run test` to run unit tests with [Vitest](https://vitest.dev).
 
-## Community
 
-- Visit and Star the [GitHub Repo](https://github.com/analogjs/analog)
-- Join the [Discord](https://chat.analogjs.org)
-- Follow us on [Twitter](https://twitter.com/analogjs)
-- Become a [Sponsor](https://github.com/sponsors/brandonroberts)
 
 ## TODO
 
@@ -109,4 +101,3 @@ Run `npm run test` to run unit tests with [Vitest](https://vitest.dev).
   - https -> https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
   - ?
 
-// NOTE: http://192.168.0.8:3044/api/webhooks/homesec/toggle

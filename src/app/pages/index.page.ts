@@ -1,16 +1,23 @@
 import { Component } from '@angular/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-home',
   standalone: true,
+  imports: [
+    MatSlideToggleModule,
+  ],
   template: `
-    <div>
+    <!-- <div>
       <a href="https://analogjs.org/" target="_blank">
         <img alt="Analog Logo" class="logo analog" src="/analog.svg" />
       </a>
-    </div>
+    </div> -->
 
     <h2>Analog</h2>
+
+    <mat-slide-toggle>Toggle me!</mat-slide-toggle>
+    <button mat-button>Basiccc</button>
 
     <h3>The fullstack meta-framework for Angular!</h3>
 
@@ -25,18 +32,19 @@ import { Component } from '@angular/core';
   `,
   styles: [
     `
-      .logo {
-        will-change: filter;
-      }
-      .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-      }
-      .read-the-docs {
-        color: #888;
-      }
+      // .logo {
+      //   will-change: filter;
+      // }
+      // .logo:hover {
+      //   filter: drop-shadow(0 0 2em #646cffaa);
+      // }
+      // .read-the-docs {
+      //   color: #888;
+      // }
     `,
   ],
 })
+
 export default class HomeComponent {
   count = 0;
 
