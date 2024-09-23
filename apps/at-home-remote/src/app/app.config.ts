@@ -9,7 +9,6 @@ import { provideFileRouter, requestContextInterceptor } from '@analogjs/router';
 
 import { provideTrpcClient } from '../trpc-client';
 
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -21,6 +20,5 @@ export const appConfig: ApplicationConfig = {
     ),
 
     provideTrpcClient(),
-
   ],
 };

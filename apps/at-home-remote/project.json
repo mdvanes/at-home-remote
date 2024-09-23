@@ -1,7 +1,9 @@
 {
   "name": "at-home-remote",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "sourceRoot": "./apps/at-home-remote/src",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@analogjs/platform:vite",
@@ -17,15 +19,15 @@
       },
       "outputs": [
         "{options.outputPath}",
-        "{workspaceRoot}/dist/at-home-remote/.nitro",
-        "{workspaceRoot}/dist/at-home-remote/ssr",
-        "{workspaceRoot}/dist/at-home-remote/analog"
+        "{workspaceRoot}/dist/apps/at-home-remote/.nitro",
+        "{workspaceRoot}/dist/apps/at-home-remote/ssr",
+        "{workspaceRoot}/dist/apps/at-home-remote/analog"
       ],
       "options": {
-        "main": "at-home-remote/src/main.ts",
-        "configFile": "at-home-remote/vite.config.ts",
-        "outputPath": "dist/at-home-remote/client",
-        "tsConfig": "at-home-remote/tsconfig.app.json"
+        "main": "apps/at-home-remote/src/main.ts",
+        "configFile": "apps/at-home-remote/vite.config.ts",
+        "outputPath": "dist/apps/at-home-remote/client",
+        "tsConfig": "apps/at-home-remote/tsconfig.app.json"
       }
     },
     "serve": {
@@ -47,11 +49,7 @@
     },
     "test": {
       "executor": "@analogjs/vitest-angular:test",
-      "outputs": [
-        "{projectRoot}/coverage"
-      ]
+      "outputs": ["{projectRoot}/coverage"]
     }
-  },
-  "tags": [],
-  "sourceRoot": "./at-home-remote/src"
+  }
 }

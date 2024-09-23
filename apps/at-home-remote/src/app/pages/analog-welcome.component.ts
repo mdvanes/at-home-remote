@@ -400,7 +400,7 @@ import { Note } from '../../note';
   `,
 })
 export class AnalogWelcomeComponent {
-   private _trpc = injectTrpcClient();
+  private _trpc = injectTrpcClient();
   public triggerRefresh$ = new Subject<void>();
   public notes$ = this.triggerRefresh$.pipe(
     switchMap(() => this._trpc.note.list.query()),

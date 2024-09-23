@@ -1,18 +1,18 @@
-import { Component } from "@angular/core";
-import { MatButtonModule } from "@angular/material/button";
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
-  selector: "mytest",
+  selector: 'mytest',
   standalone: true,
   imports: [MatSlideToggleModule, MatButtonModule],
   styles: [
     `
       :host {
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-          "Noto Color Emoji";
+          'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+          'Noto Color Emoji';
         display: flex;
         padding: 2rem 1rem 8rem;
         flex-direction: column;
