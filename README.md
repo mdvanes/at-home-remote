@@ -78,10 +78,12 @@ start with `docker-compose up -d`
 
 ### Start for local development
 
-- Start: `npx nx serve at-home-remote`
+- Start development server: `npx nx serve at-home-remote`
+- Start Storybook: `npx nx storybook components`
 - Ng Generate: `npx nx g @angular/material:dashboard dashboard --project at-home-remote` (instead of `ng generate @angular/material:dashboard dashboard`)
 - List generators: `npx nx list @nx/angular`
 - Generate lib: `npx nx g @nx/angular:lib components --directory=libs/ui/components`
+- Generate missing storybook stories: `npx nx g @nx/angular:stories --project=components`
 
 ---
 
