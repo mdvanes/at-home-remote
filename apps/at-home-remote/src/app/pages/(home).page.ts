@@ -1,19 +1,23 @@
 import { Component } from '@angular/core';
-import { MytestComponent } from './mytest.component';
+import { MytestComponent } from '../components/mytest.component';
+import { TopNavComponent } from '../components/top-nav/top-nav.component';
 import { ComponentsComponent } from '@at-home-remote/components';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'at-home-remote-home',
   standalone: true,
-  imports: [MytestComponent, ComponentsComponent],
+  imports: [
+    MytestComponent,
+    ComponentsComponent,
+    MatToolbarModule,
+    MatIconModule,TopNavComponent
+  ],
   styleUrl: './home.scss',
   template: `<div class="container">
     <header>
-      <a href="/study">Home</a>
-      <a href="/study">Welcome</a>
-      <a href="/study">Study</a>
-      <a href="/study">Dashboard</a>
-      <a href="/study">Dashboard2</a>
+      <top-nav />
     </header>
     <main>
       <lib-components></lib-components>
