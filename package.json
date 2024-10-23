@@ -12,6 +12,7 @@
     "@angular-devkit/schematics": "^18.0.0",
     "@angular/compiler-cli": "^18.0.0",
     "@eslint/js": "^9.8.0",
+    "@ngx-material-dashboard/widgets": "^0.7.3-beta.0",
     "@nx/angular": "^19.1.0",
     "@nx/devkit": "^19.1.0",
     "@nx/eslint": "19.8.0",
