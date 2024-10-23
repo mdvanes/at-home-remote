@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@at-home-remote/components": ["libs/ui/components/src/index.ts"]
+      "@at-home-remote/components": ["libs/ui/components/src/index.ts"],
+      "@at-home-remote/study": ["libs/feature/study/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

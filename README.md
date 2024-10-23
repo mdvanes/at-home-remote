@@ -82,8 +82,9 @@ start with `docker-compose up -d`
 - Start Storybook: `npx nx storybook components`
 - Ng Generate: `npx nx g @angular/material:dashboard dashboard --project at-home-remote` (instead of `ng generate @angular/material:dashboard dashboard`)
 - List generators: `npx nx list @nx/angular`
-- Generate lib: `npx nx g @nx/angular:lib components --directory=libs/ui/components`
+- Generate lib: `npx nx g @nx/angular:lib study --directory=libs/feature/study`
 - Generate missing storybook stories: `npx nx g @nx/angular:stories --project=components`
+- Adding Matero to the project. Instead of `ng add ng-matero` use `npx nx add ng-matero --project at-home-remote`
 
 ---
 

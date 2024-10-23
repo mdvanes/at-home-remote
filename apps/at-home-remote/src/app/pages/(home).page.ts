@@ -8,6 +8,7 @@ import { ComponentsComponent } from '@at-home-remote/components';
   standalone: true,
   imports: [AnalogWelcomeComponent, MytestComponent, ComponentsComponent],
   template: `
+    <a href="/study">Study</a>
     <lib-components></lib-components>
     <mytest ngSkipHydration />
     <at-home-remote-analog-welcome />
