@@ -1,9 +1,14 @@
 name: Publish Docker image to Registry
 
 on: 
-  push:
+  # push:
     # tags:
     #   - '*'
+  workflow_run:
+    workflows: ["CI"]
+    branches: [main]
+    types: 
+      - completed
 
 env:
   REGISTRY: ghcr.io
