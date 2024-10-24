@@ -1,0 +1,17 @@
+# NOTE: This is the docker-compose for local development. For the production docker-compose, see README.md
+services:
+  at-home-remote:
+    build: .
+    volumes:
+      - ./data/docker:/usr/src/app/data
+      - ./.env:/usr/src/app/.env
+    restart: unless-stopped
+  nginx:
+    image: nginx:latest
+    ports:
+      - 3044:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+      - ./auth:/etc/nginx/auth
+    restart: unless-stopped
