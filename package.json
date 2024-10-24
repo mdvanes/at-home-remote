@@ -2,7 +2,9 @@
   "name": "@at-home-remote/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "npx nx build at-home-remote"
+  },
   "private": true,
   "devDependencies": {
     "@analogjs/platform": "^1.7.0",
@@ -69,6 +71,7 @@
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/platform-server": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@dotenvx/dotenvx": "^1.20.1",
     "@trpc/client": "^10.25.0",
     "@trpc/server": "^10.25.0",
     "front-matter": "^4.0.2",
