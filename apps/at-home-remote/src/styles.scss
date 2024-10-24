@@ -3,15 +3,21 @@
 $theme: mat.define-theme(
   (
     color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+      theme-type: dark,
+      primary: mat.$magenta-palette,
+      tertiary: mat.$violet-palette,
+    ),
+    typography: (
+      // font-family: 'Roboto, sans-serif',
+      // color: mat.$dark-theme-text-color,
+      // color: mat.$violet-palette,,,
     ),
   )
 );
 
 body {
   @include mat.all-component-themes($theme);
+  // background-color: #161215;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   margin: 0;
   height: 100%;
@@ -24,10 +30,10 @@ html {
 .container {
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 180px 1fr 250px;
+  grid-template-rows: 64px 1fr 250px;
   grid-template-areas: 'header' 'main' 'footer';
-  
-  background-color: aquamarine;
+
+  // background-color: aquamarine;
   height: 100%;
 
   header {
@@ -36,7 +42,7 @@ html {
 
   main {
     grid-area: main;
-    background-color: burlywood;
+    // background-color: burlywood;
   }
 
   footer {
@@ -46,3 +52,22 @@ html {
 
 @include mat.core();
 @include mat.color-variants-backwards-compatibility($theme);
+
+:root {
+  // --mat-app-background: #{mat.get-theme-color($theme, primary, 40)};
+  // .mat-app-background {
+  //   background-color: red;
+  // }
+
+  mat-toolbar {
+    --mat-toolbar-container-background-color: #{mat.get-theme-color(
+        $theme,
+        primary,
+        40
+      )};
+    // --mat-toolbar-container-color: #{mat.get-theme-color($theme, tertiary, 50)};
+  }
+  // mat-button {
+
+  // }
+}

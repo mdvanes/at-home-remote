@@ -47,3 +47,7 @@ Thumbs.db
 storybook-static
 
 .env
+
+auth/
+certs/
+data/

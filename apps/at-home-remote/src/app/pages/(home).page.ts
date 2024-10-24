@@ -4,6 +4,7 @@ import { TopNavComponent } from '../components/top-nav/top-nav.component';
 import { ComponentsComponent } from '@at-home-remote/components';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { NavigationComponent } from "../components/navigation/navigation.component";
 
 @Component({
   selector: 'at-home-remote-home',
@@ -14,10 +15,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatIconModule,
     TopNavComponent,
-  ],
+    NavigationComponent
+],
   styleUrl: './home.scss',
   template: `<div class="container">
     <header>
+      <!-- <navigation /> -->
       <top-nav />
     </header>
     <main>

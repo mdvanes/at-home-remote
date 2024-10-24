@@ -16,7 +16,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
         display: flex;
         padding: 2rem 1rem 8rem;
         flex-direction: column;
-        background: rgb(250 250 250);
+        // background: rgb(250 250 250);
         // height: 100%;
       }
     `,
