@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'top-nav',
@@ -30,12 +31,35 @@ import { MatIconModule } from '@angular/material/icon';
         aria-label="Example icon-button with menu icon"
       ></button> -->
       <button mat-button><mat-icon>menu</mat-icon> At Home Remote</button>
+
+      @if (!activePath) {
+      <a href="/"><button mat-flat-button>Home</button></a>
+      } @else {
       <a href="/"><button mat-button>Home</button></a>
+      }
+      <!-- DOES NOT WORK <a href="/welcome"
+        ><button
+          [attr.mat-button]="activePath !== 'welcome'"
+          [attr.mat-flat-button]="activePath === 'welcome'"
+        >
+          Welcome
+        </button></a
+      > -->
+      <!-- DOES NOT WORK <a href="/welcome" routerLinkActive="active"
+        ><button mat-button routerLinkActive="active">Welcome</button></a
+      > -->
+
+      @if (activePath === 'welcome') {
+      <a href="/welcome"><button mat-flat-button>Welcome</button></a>
+      } @else {
       <a href="/welcome"><button mat-button>Welcome</button></a>
-      <a href="/study"><button mat-flat-button>Study</button></a>
+      }
+
+      <a href="/study"><button mat-button>Study</button></a>
       <a href="/dashboard"><button mat-button>Dashboard</button></a>
       <a href="/dashboard2"><button mat-button>Dashboard2</button></a>
       <span class="example-spacer" style="flex: 1 1 auto;"></span>
+
       <button
         mat-icon-button
         class="example-icon favorite-icon"
@@ -53,4 +77,12 @@ import { MatIconModule } from '@angular/material/icon';
     </mat-toolbar>
   `,
 })
-export class TopNavComponent {}
+export class TopNavComponent {
+  readonly route = inject(ActivatedRoute);
+  readonly activePath = this.route.pathFromRoot[1].snapshot.url[0]?.path;
+
+  // ngOnInit() {
+  //   console.log(this.activePath);
+  //   // console.log(this.route.pathFromRoot[1].snapshot.url[0].path);
+  // }
+}

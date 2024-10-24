@@ -12,7 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
     MytestComponent,
     ComponentsComponent,
     MatToolbarModule,
-    MatIconModule,TopNavComponent
+    MatIconModule,
+    TopNavComponent,
   ],
   styleUrl: './home.scss',
   template: `<div class="container">
