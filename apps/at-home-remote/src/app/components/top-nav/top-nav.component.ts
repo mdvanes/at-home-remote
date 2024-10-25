@@ -10,16 +10,19 @@ import { ActivatedRoute } from '@angular/router';
   imports: [MatButtonModule, MatToolbarModule, MatIconModule],
   styles: [
     `
+      @use '@angular/material' as mat;
+
       :host {
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
           'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
           'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
           'Noto Color Emoji';
-        // display: flex;
-        // padding: 2rem 1rem 8rem;
-        // flex-direction: column;
-        // background: rgb(250 250 250);
-        // height: 100%;
+
+        // nav bar background: rgba(129,0,130,1)
+        --mat-toolbar-container-text-color: #ffabf3; // #{mat.get-theme-color($theme, tertiary, 50)};
+
+        --mdc-filled-button-container-color: #b117af; // rgba(143, 26, 142, 1);
+        --mdc-filled-button-label-text-color: #ffabf3;
       }
     `,
   ],

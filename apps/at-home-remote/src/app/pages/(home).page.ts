@@ -4,6 +4,7 @@ import { TopNavComponent } from '../components/top-nav/top-nav.component';
 import {
   ComponentsComponent,
   SwitchesListComponent,
+  FooterComponent,
 } from '@at-home-remote/components';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -21,6 +22,7 @@ import { NavigationComponent } from '../components/navigation/navigation.compone
     TopNavComponent,
     NavigationComponent,
     SwitchesListComponent,
+    FooterComponent,
     MatCardModule,
   ],
   styleUrl: './home.scss',
@@ -35,10 +37,8 @@ import { NavigationComponent } from '../components/navigation/navigation.compone
           <lib-switches-list />
         </mat-card-content>
       </mat-card>
-      <lib-components></lib-components>
-      <mytest ngSkipHydration />
     </main>
-    <footer>footer</footer>
+    <lib-footer />
   </div>`,
 })
 export default class HomeComponent {}

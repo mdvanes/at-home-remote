@@ -10,14 +10,13 @@ $theme: mat.define-theme(
     typography: (
       // font-family: 'Roboto, sans-serif',
       // color: mat.$dark-theme-text-color,
-      // color: mat.$violet-palette,,,
+      // color: mat.$violet-palette,
     ),
   )
 );
 
 body {
   @include mat.all-component-themes($theme);
-  // background-color: #161215;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   margin: 0;
   height: 100%;
@@ -32,8 +31,6 @@ html {
   grid-template-columns: auto;
   grid-template-rows: 64px 1fr 250px;
   grid-template-areas: 'header' 'main' 'footer';
-
-  // background-color: aquamarine;
   height: 100%;
 
   header {
@@ -42,10 +39,9 @@ html {
 
   main {
     grid-area: main;
-    // background-color: burlywood;
   }
 
-  footer {
+  lib-footer {
     grid-area: footer;
   }
 }
