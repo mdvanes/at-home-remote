@@ -2,7 +2,7 @@
 
 Variant of the HomeRemote home automation dashboard, that is only accessible from the local network. Uses Nx, Analog and Angular Material.
 
-[![Publish to Docker Hub](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml/badge.svg?branch=qwik)](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml)
+[![Publish to Docker Hub](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/mdvanes/at-home-remote/actions/workflows/publish.yml)
 
 
 ## Usage
