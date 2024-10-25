@@ -6,3 +6,7 @@ export interface State {
     device_class?: 'temperature' | 'humidity';
   };
 }
+
+export interface StateWithWritable extends State {
+  writable: boolean;
+}

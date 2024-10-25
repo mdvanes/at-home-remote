@@ -33,7 +33,7 @@ import { ActivatedRoute } from '@angular/router';
         class="example-icon"
         aria-label="Example icon-button with menu icon"
       ></button> -->
-      <button mat-button><mat-icon>menu</mat-icon> At Home Remote</button>
+      <button mat-button><mat-icon>home</mat-icon> At Home Remote</button>
 
       @if (!activePath) {
       <a href="/"><button mat-flat-button>Home</button></a>
@@ -56,38 +56,39 @@ import { ActivatedRoute } from '@angular/router';
       <a href="/welcome"><button mat-flat-button>Welcome</button></a>
       } @else {
       <a href="/welcome"><button mat-button>Welcome</button></a>
-      }
-
-      @if (activePath === 'study') {
+      } @if (activePath === 'study') {
       <a href="/study"><button mat-flat-button>Study</button></a>
       } @else {
       <a href="/study"><button mat-button>Study</button></a>
-      }
-
-      @if (activePath === 'dashboard') {
+      } @if (activePath === 'dashboard') {
       <a href="/dashboard"><button mat-flat-button>Dashboard</button></a>
       } @else {
       <a href="/dashboard"><button mat-button>Dashboard</button></a>
       }
 
-      
       <a href="/dashboard2"><button mat-button>Dashboard2</button></a>
       <span class="example-spacer" style="flex: 1 1 auto;"></span>
 
-      <button
-        mat-icon-button
-        class="example-icon favorite-icon"
-        aria-label="Example icon-button with heart icon"
-      >
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with share icon"
-      >
-        <mat-icon>share</mat-icon>
-      </button>
+      <a href="https://mdworld.nl" target="_blank">
+        <button
+          mat-icon-button
+          class="example-icon favorite-icon"
+          aria-label="Example icon-button with heart icon"
+          title="mdworld.nl"
+        >
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+      </a>
+      <a href="https://github.com/mdvanes/at-home-remote" target="_blank">
+        <button
+          mat-icon-button
+          class="example-icon"
+          aria-label="Example icon-button with share icon"
+          title="GitHub"
+        >
+          <mat-icon>star</mat-icon>
+        </button>
+      </a>
     </mat-toolbar>
   `,
 })

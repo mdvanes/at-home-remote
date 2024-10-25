@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { State } from './smart-entities.types';
+import { State, StateWithWritable } from './smart-entities.types';
 import { SmartEntitiesService } from './smart-entities.service';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -13,12 +13,14 @@ export const isSwitch = (s: State) =>
   styleUrl: './switches-list.component.scss',
   standalone: true,
   imports: [MatListModule, FormsModule, MatSlideToggleModule],
-  template: `<mat-list>
+  template: `
+    <h2>Light Switches</h2>
+    <mat-list>
     @for (switch of switches; track switch.entity_id) {
     <mat-list-item class="switches-list-item">
       <mat-slide-toggle
-        disabled
         [(ngModel)]="states[$index]"
+        [disabled]="disabled[$index]"
         labelPosition="before"
         class="switches-list-item1"
       >
@@ -31,11 +33,8 @@ export const isSwitch = (s: State) =>
   </mat-list>`,
 })
 export class SwitchesListComponent {
-  switches: State[] = [
-    // { entity_id: "0", name: 'Switch 1' },
-    // { entity_id: "1", name: 'Switch 2' },
-  ];
-  isChecked = true;
+  switches: StateWithWritable[] = [];
+  disabled: boolean[] = [];
   states: boolean[] = [];
 
   constructor(private smartEntitiesService: SmartEntitiesService) {}
@@ -48,6 +47,7 @@ export class SwitchesListComponent {
     this.smartEntitiesService.getSmartEntities().subscribe((data) => {
       // console.log('getSwitches', data);
       this.switches = data.filter(isSwitch);
+      this.disabled = this.switches.map((s) => s.writable === false);
       this.states = this.switches.map((s) => s.state === 'on');
     });
     // this.switches = this.smartEntitiesService.getAll();
