@@ -58,8 +58,19 @@ import { ActivatedRoute } from '@angular/router';
       <a href="/welcome"><button mat-button>Welcome</button></a>
       }
 
+      @if (activePath === 'study') {
+      <a href="/study"><button mat-flat-button>Study</button></a>
+      } @else {
       <a href="/study"><button mat-button>Study</button></a>
+      }
+
+      @if (activePath === 'dashboard') {
+      <a href="/dashboard"><button mat-flat-button>Dashboard</button></a>
+      } @else {
       <a href="/dashboard"><button mat-button>Dashboard</button></a>
+      }
+
+      
       <a href="/dashboard2"><button mat-button>Dashboard2</button></a>
       <span class="example-spacer" style="flex: 1 1 auto;"></span>
 
