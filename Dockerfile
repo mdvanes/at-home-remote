@@ -20,4 +20,4 @@ COPY --from=build /usr/src/app/dist ./dist
 
 EXPOSE 3000
 
-CMD [ "npx", "dotenvx", "run", "--", "node", "dist/analog/server/index.mjs"]
+CMD [ "npx", "dotenvx", "run", "--", "node", "dist/apps/at-home-remote/analog/server/index.mjs"]

@@ -1,10 +1,10 @@
 import { defineEventHandler } from 'h3';
-import { createLog } from '../../../../../util/log';
-import { challengeUserAgent } from '../../../../../util/challenge';
+import { createLog } from '../../../../util/log';
+import { challengeUserAgent } from '../../../../util/challenge';
 
 const log = createLog('switches/toggle');
 
-// Dev mode: curl http://localhost:5173/api/webhooks/switches/toggle
+// Dev mode: curl http://localhost:4200/api/webhooks/switches/toggle
 // Docker compose: curl -k https://username:password@localhost:3044/api/webhooks/switches/toggle
 export default defineEventHandler(async (event) => {
   log(event.toString());

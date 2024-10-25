@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "npx nx serve at-home-remote",
     "build": "npx nx build at-home-remote"
   },
   "private": true,
