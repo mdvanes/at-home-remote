@@ -1,3 +1,5 @@
+import { PanelModes } from '@at-home-remote/components';
+
 interface SensorRow {
   area: number;
   zone: number;
@@ -27,8 +29,6 @@ export interface HomesecDevicesResponse {
   senrows: SensorRow[];
 }
 
-type Modes = 'Disarm' | 'Home Arm 1';
-
 export enum PcondformModes {
   Disarm = '0',
   Arm = '1',
@@ -38,8 +38,8 @@ export enum PcondformModes {
 
 export interface HomesecPanelResponse {
   updates: {
-    mode_a1: Modes;
-    mode_a2: Modes;
+    mode_a1: PanelModes;
+    mode_a2: PanelModes;
     battery_ok: '1';
     battery: 'Normal';
     tamper_ok: '1';

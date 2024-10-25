@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatChipsModule } from '@angular/material/chips';
+import { HomesecService } from './homesec.service';
+import { Modes } from './homesec.types';
 
 @Component({
   selector: 'lib-homesec-slider',
@@ -19,21 +21,31 @@ import { MatChipsModule } from '@angular/material/chips';
     `,
   ],
   template: ` <h2>Home Security</h2>
-    <mat-slider
-      min="1"
-      max="4"
-      showTickMarks
-      discrete
-      [displayWith]="formatLabel"
-    >
-      <input matSliderThumb [value]="val" />
-    </mat-slider>
-    <mat-chip>Security Level: {{ val }}</mat-chip>`,
+    <mat-chip-listbox class="mat-mdc-chip-set-stacked">
+      @for (opt of homeSecModes; track opt) {
+      <mat-chip-option [selected]="selected[$index]">{{ opt }}</mat-chip-option>
+      }
+    </mat-chip-listbox>`,
 })
 export class HomesecSliderComponent {
-  val = 2;
+  selected = [false, false, false, false];
 
-  formatLabel(value: number): string {
-    return value + ' stars';
+  readonly homeSecModes: Modes[] = [
+    'Error',
+    'Disarm',
+    'Home Arm 1',
+    'Full Arm',
+  ];
+
+  constructor(private homesecService: HomesecService) {}
+
+  ngOnInit() {
+    this.getHomesec();
+  }
+
+  getHomesec() {
+    this.homesecService.getHomesecState().subscribe((data) => {
+      this.selected = this.homeSecModes.map((opt) => opt === data.mode);
+    });
   }
 }

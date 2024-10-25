@@ -26,7 +26,7 @@ export const homeSecFetch = async <T>(
 
     return response;
   } catch (err) {
-    log(logId, err);
+    log(logId, err as string);
 
     throw createError({
       statusCode: 500,
