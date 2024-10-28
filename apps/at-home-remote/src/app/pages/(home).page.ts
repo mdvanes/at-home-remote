@@ -5,7 +5,7 @@ import {
   ComponentsComponent,
   SwitchesListComponent,
   FooterComponent,
-  HomesecSliderComponent,
+  HomesecStateComponent,
 } from '@at-home-remote/components';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -27,7 +27,7 @@ import { NavigationComponent } from '../components/navigation/navigation.compone
     FooterComponent,
     MatCardModule,
     MatGridListModule,
-    HomesecSliderComponent,
+    HomesecStateComponent,
   ],
   styleUrl: './home.scss',
   template: `<div class="container">
