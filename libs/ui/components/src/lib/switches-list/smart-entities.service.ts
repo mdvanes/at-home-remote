@@ -16,13 +16,11 @@ export class SmartEntitiesService {
     return this.http.get<StateWithWritable[]>('/api/v1/smart-entities');
   }
 
-  getData() {
-    return this.http.get<StateWithWritable[]>('/assets/data.json');
-  }
-
   getSmartEntitiesEvents(): Observable<MessageEvent> {
     return new Observable((observer) => {
-      const eventSource = this.sseService.getEventSource('/api/v1/sse');
+      const eventSource = this.sseService.getEventSource(
+        '/api/v1/smart-entities/sse'
+      );
 
       eventSource.onmessage = (event) => {
         this.ngZone.run(() => {

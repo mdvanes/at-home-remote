@@ -1,5 +1,5 @@
 import { defineEventHandler, createEventStream } from 'h3';
-import { getSmartEntities } from '../../util/smart-entities';
+import { getSmartEntities } from '../../../../util/smart-entities';
 
 export default defineEventHandler(async (event) => {
   const eventStream = createEventStream(event);
