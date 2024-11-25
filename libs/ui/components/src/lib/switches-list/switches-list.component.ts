@@ -15,7 +15,9 @@ export const isSwitch = (s: State) =>
   standalone: true,
   imports: [MatListModule, FormsModule, MatSlideToggleModule, MatProgressBar],
   template: `<h2>Light Switches</h2>
-    @if (isLoading) {
+    @if (isError) {
+    <span>Error</span>
+    } @else if (isLoading) {
     <mat-progress-bar mode="buffer"></mat-progress-bar>
     } @else {
     <mat-list>
@@ -41,12 +43,20 @@ export class SwitchesListComponent {
   disabled: boolean[] = [];
   states: boolean[] = [];
   isLoading = true;
+  isError = false;
 
   constructor(private smartEntitiesService: SmartEntitiesService) {}
 
   ngOnInit() {
     this.smartEntitiesService.getSmartEntitiesEvents().subscribe((data) => {
+      if (data.data === '"Error"') {
+        console.error('Error fetching smart entities');
+        this.isError = true;
+        return;
+      }
+      this.isError = false;
       const smartEntities = JSON.parse(data.data);
+      // console.log(data.error);
       this.switches = smartEntities.filter(isSwitch);
       this.disabled = this.switches.map((s) => s.writable === false);
       this.states = this.switches.map((s) => s.state === 'on');

@@ -2,7 +2,7 @@ import { Injectable, inject, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { StateWithWritable } from './smart-entities.types';
 import { Observable } from 'rxjs';
-import { SseService } from './sse.service';
+import { SseService } from '../sse.service';
 
 @Injectable({
   providedIn: 'root',

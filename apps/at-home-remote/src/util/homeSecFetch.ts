@@ -22,7 +22,7 @@ export const homeSecFetch = async <T>(
     );
 
     const response: T = await (await fetch(url, { ...init, headers })).json();
-    log(logId, JSON.stringify(response, null, 2));
+    log(logId, (response as { updates: { mode_a1: string } }).updates?.mode_a1);
 
     return response;
   } catch (err) {
