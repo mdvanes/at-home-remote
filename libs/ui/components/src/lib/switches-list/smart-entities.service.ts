@@ -16,6 +16,10 @@ export class SmartEntitiesService {
     return this.http.get<StateWithWritable[]>('/api/v1/smart-entities');
   }
 
+  setSmartEntityState(id: string, state: string) {
+    return this.http.post(`/api/v1/smart-entities/${id}`, { state: state });
+  }
+
   getSmartEntitiesEvents(): Observable<MessageEvent> {
     return new Observable((observer) => {
       const eventSource = this.sseService.getEventSource(

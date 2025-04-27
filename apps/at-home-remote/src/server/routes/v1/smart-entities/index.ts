@@ -4,7 +4,7 @@ import { getSmartEntities } from '../../../util/smart-entities';
 
 export default defineEventHandler<
   EventHandlerRequest,
-  Promise<StateWithWritable[]>
+  Promise<StateWithWritable[] | 'Error'>
 >(async () => {
-  return getSmartEntities();
+  return getSmartEntities('/api/v1/smart-entities');
 });

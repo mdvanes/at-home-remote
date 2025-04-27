@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { State, StateWithWritable } from './smart-entities.types';
 import { MatListModule } from '@angular/material/list';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {
+  MatSlideToggleChange,
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatIconButton } from '@angular/material/button';
@@ -47,6 +50,7 @@ export const isSwitch = (s: State) =>
           [disabled]="disabled[$index]"
           labelPosition="before"
           class="switches-list-item1"
+          (change)="toggleChange($event, switch.entity_id)"
         >
           <span class="switches-list-item2">
             {{ switch.attributes?.friendly_name }}</span
@@ -80,6 +84,18 @@ export class SwitchesListComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  toggleChange(evt: MatSlideToggleChange, id: string | undefined) {
+    if (!id) {
+      return;
+    }
+
+    this.smartEntitiesService
+      .setSmartEntityState(id, evt.checked ? 'on' : 'off')
+      .subscribe(() => {
+        this.getSmartEntities();
+      });
   }
 
   getSmartEntitiesEvents() {
