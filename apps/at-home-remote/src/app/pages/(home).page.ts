@@ -1,28 +1,24 @@
 import { Component } from '@angular/core';
-import { MytestComponent } from '../components/mytest.component';
-import { TopNavComponent } from '../components/top-nav/top-nav.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import {
-  ComponentsComponent,
-  SwitchesListComponent,
   FooterComponent,
   HomesecStateComponent,
+  SwitchesListComponent,
 } from '@at-home-remote/components';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { NavigationComponent } from '../components/navigation/navigation.component';
+import { TopNavComponent } from '../components/top-nav/top-nav.component';
+
+const INNER_WIDTH = 500;
 
 @Component({
   selector: 'at-home-remote-home',
   standalone: true,
   imports: [
-    MytestComponent,
-    ComponentsComponent,
     MatToolbarModule,
     MatIconModule,
     TopNavComponent,
-    NavigationComponent,
     SwitchesListComponent,
     FooterComponent,
     MatCardModule,
@@ -32,11 +28,15 @@ import { NavigationComponent } from '../components/navigation/navigation.compone
   styleUrl: './home.scss',
   template: `<div class="container">
     <header>
-      <!-- <navigation /> -->
       <top-nav />
     </header>
     <main>
-      <mat-grid-list cols="2">
+      <mat-grid-list
+        [cols]="mainCols"
+        (window:resize)="onResize($event)"
+        gutterSize="2rem"
+        rowHeight="1:2"
+      >
         <mat-grid-tile>
           <mat-card appearance="outlined" class="card">
             <mat-card-content>
@@ -56,4 +56,14 @@ import { NavigationComponent } from '../components/navigation/navigation.compone
     <lib-footer />
   </div>`,
 })
-export default class HomeComponent {}
+export default class HomeComponent {
+  mainCols = 2;
+
+  ngOnInit() {
+    this.mainCols = window.innerWidth <= INNER_WIDTH ? 1 : 2;
+  }
+
+  onResize(event: Event) {
+    this.mainCols = (event.target as Window)?.innerWidth <= INNER_WIDTH ? 1 : 2;
+  }
+}

@@ -35,12 +35,7 @@ import { isDevMode } from '@angular/core';
         aria-label="Example icon-button with menu icon"
       ></button> -->
       <button mat-button><mat-icon>home</mat-icon> At Home Remote</button>
-
-      @if (!activePath) {
-      <a href="/"><button mat-flat-button>Home</button></a>
-      } @else {
-      <a href="/"><button mat-button>Home</button></a>
-      }
+      
       <!-- DOES NOT WORK <a href="/welcome"
         ><button
           [attr.mat-button]="activePath !== 'welcome'"
@@ -53,7 +48,13 @@ import { isDevMode } from '@angular/core';
         ><button mat-button routerLinkActive="active">Welcome</button></a
       > -->
 
-      @if (isDevMode) { 
+      <!-- @if (isDevMode) {
+        @if (!activePath) {
+        <a href="/"><button mat-flat-button>Home</button></a>
+        } @else {
+        <a href="/"><button mat-button>Home</button></a>
+        }
+
         @if (activePath === 'welcome') {
         <a href="/welcome"><button mat-flat-button>Welcome</button></a>
         } @else {
@@ -77,7 +78,7 @@ import { isDevMode } from '@angular/core';
         } @else {
         <a href="/dashboard2"><button mat-button>Dashboard2</button></a>
         }
-      }
+      } -->
       <span class="example-spacer" style="flex: 1 1 auto;"></span>
 
       <a href="https://mdworld.nl" target="_blank">
