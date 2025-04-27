@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { State, StateWithWritable } from './smart-entities.types';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatIconButton } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { SmartEntitiesService } from './smart-entities.service';
 
@@ -13,8 +15,25 @@ export const isSwitch = (s: State) =>
   selector: 'lib-switches-list',
   styleUrl: './switches-list.component.scss',
   standalone: true,
-  imports: [MatListModule, FormsModule, MatSlideToggleModule, MatProgressBar],
-  template: `<h2>Light Switches</h2>
+  imports: [
+    MatListModule,
+    FormsModule,
+    MatSlideToggleModule,
+    MatProgressBar,
+    MatIconModule,
+    MatIconButton,
+  ],
+  template: `<h2>
+      Light Switches
+      <button
+        mat-icon-button
+        aria-label="Reload button"
+        title="Reload switches"
+        (click)="getSmartEntities()"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </h2>
     @if (isError) {
     <span>Error</span>
     } @else if (isLoading) {
@@ -38,7 +57,7 @@ export const isSwitch = (s: State) =>
     </mat-list>
     } `,
 })
-export class SwitchesListComponent {
+export class SwitchesListComponent implements OnInit {
   switches: StateWithWritable[] = [];
   disabled: boolean[] = [];
   states: boolean[] = [];
@@ -48,6 +67,22 @@ export class SwitchesListComponent {
   constructor(private smartEntitiesService: SmartEntitiesService) {}
 
   ngOnInit() {
+    this.getSmartEntities();
+  }
+
+  getSmartEntities() {
+    this.smartEntitiesService.getSmartEntities().subscribe((data) => {
+      const smartEntities = data;
+      this.switches = smartEntities.filter(isSwitch);
+      this.disabled = this.switches.map((s) => s.writable === false);
+      this.states = this.switches.map((s) => s.state === 'on');
+      if (this.isLoading) {
+        this.isLoading = false;
+      }
+    });
+  }
+
+  getSmartEntitiesEvents() {
     this.smartEntitiesService.getSmartEntitiesEvents().subscribe((data) => {
       if (data.data === '"Error"') {
         console.error('Error fetching smart entities');

@@ -3,11 +3,13 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatChipsModule } from '@angular/material/chips';
 import { HomesecService } from './homesec.service';
 import { Modes } from './homesec.types';
+import { MatIconModule } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'lib-homesec-slider',
   standalone: true,
-  imports: [MatSliderModule, MatChipsModule],
+  imports: [MatSliderModule, MatChipsModule, MatIconModule, MatIconButton],
   styles: [
     `
       :host {
@@ -20,7 +22,17 @@ import { Modes } from './homesec.types';
       }
     `,
   ],
-  template: `<h2>Home Security</h2>
+  template: `<h2>
+      Home Security
+      <button
+        mat-icon-button
+        aria-label="Reload button"
+        title="Reload Home Security"
+        (click)="getHomesec()"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </h2>
     <mat-chip-listbox class="mat-mdc-chip-set-stacked">
       @for (opt of homeSecModes; track opt) {
       <mat-chip-option disabled [selected]="selected[$index]">{{
